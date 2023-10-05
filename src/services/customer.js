@@ -9,15 +9,15 @@ class CustomerService {
     return repository.GetAll();
   }
 
-  async GetById(id) {
-    return repository.GetById(id);
+  async GetById(id, transaction) {
+    return repository.GetById(id, transaction);
   }
 
-  async Add(customer) {
+  async Add(customer, transaction) {
     if (!customer) {
       throw new Error(this.errorMessageCustomer);
     }
-    repository.Add(customer);
+    repository.Add(customer, transaction);
   }
 
   async Update(id, customer) {

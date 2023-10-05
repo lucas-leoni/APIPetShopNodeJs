@@ -5,14 +5,15 @@ class CustomerRepository {
     return await Customer.findAll();
   }
 
-  async GetById(id) {
+  async GetById(id, transaction) {
     return await Customer.findOne({
       where: { id },
+      transaction,
     });
   }
 
-  async Add(customer) {
-    await Customer.create(customer);
+  async Add(customer, transaction) {
+    await Customer.create(customer, { transaction });
   }
 
   async Update(id, customer) {
