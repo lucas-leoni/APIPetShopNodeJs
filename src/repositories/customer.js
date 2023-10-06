@@ -1,4 +1,5 @@
 const Customer = require('../models/customer.js');
+const Dog = require('../models/dog.js');
 
 class CustomerRepository {
   async GetAll() {
@@ -8,12 +9,15 @@ class CustomerRepository {
   async GetById(id, transaction) {
     return await Customer.findOne({
       where: { id },
+      include: [{ model: Dog, as: 'dogs' }],
+      // include: ['cachorros'],
       transaction,
     });
   }
 
   async Add(customer, transaction) {
-    await Customer.create(customer, { transaction });
+    const result = await Customer.create(customer, { transaction });
+    return result;
   }
 
   async Update(id, customer) {

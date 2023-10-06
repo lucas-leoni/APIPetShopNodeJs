@@ -1,7 +1,8 @@
-const DataTypes = require('sequelize');
+const Customer = require('./customer.js');
+const { DataTypes } = require('sequelize');
 const Sequelize = require('../database.js');
 
-const Customer = Sequelize.define(
+const Dog = Sequelize.define(
   'cachorros',
   {
     id: {
@@ -13,14 +14,19 @@ const Customer = Sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    /* customer: {
+    breed: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    customerId: {
+      field: 'customer_id',
+      type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: 'customers',
+        model: Customer,
         key: 'id',
       },
-    }, */
+    },
   },
   {
     createdAt: false,
@@ -28,4 +34,4 @@ const Customer = Sequelize.define(
   }
 );
 
-module.exports = Customer;
+module.exports = Dog;
