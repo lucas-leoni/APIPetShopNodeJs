@@ -10,7 +10,6 @@ class CustomerRepository {
     return await Customer.findOne({
       where: { id },
       include: [{ model: Dog, as: 'dogs' }],
-      // include: ['cachorros'],
       transaction,
     });
   }

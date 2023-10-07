@@ -2,38 +2,44 @@ const DogRepository = require('../repositories/dog.js');
 const repository = new DogRepository();
 
 class DogService {
-  errorMessageDog = 'Provide all data!';
-  indexErrorMessage = 'Invalid index!';
+  CheckDog(dog) {
+    if (!dog) {
+      throw new Error('Dog to add was not provided');
+    } else if (!dog.name) {
+      throw new Error('Dog name was not provided');
+    } else if (!dog.breed) {
+      throw new Error('Dog breed was not provided');
+    }
+
+    return true;
+  }
 
   async GetAll() {
     return repository.GetAll();
   }
 
-  async GetById(id) {
-    return repository.GetById(id);
+  async GetById(id, transaction) {
+    return repository.GetById(id, transaction);
   }
 
-  async Add(dog) {
-    if (!dog) {
-      throw new Error(this.errorMessageDog);
+  async Add(dog, transaction) {
+    this.CheckDog(dog);
+    if (!dog.customerId) {
+      throw new Error('Dog customerId was not provided');
     }
-    repository.Add(dog);
+    return repository.Add(dog, transaction);
   }
 
   async Update(id, dog) {
-    if (!dog) {
-      throw new Error(this.errorMessageDog);
-    } else if (!id || isNaN(id)) {
-      throw new Error(this.indexErrorMessage);
+    if (!id) {
+      throw new Error('Missing dog id for updates');
     }
-    repository.Update(id, dog);
+    this.CheckDog(dog);
+    return repository.Update(id, dog);
   }
 
   async Delete(id) {
-    if (!id || isNaN(id)) {
-      throw new Error(this.indexErrorMessage);
-    }
-    repository.Delete(id);
+    return repository.Delete(id);
   }
 }
 

@@ -1,24 +1,31 @@
 const Dog = require('../models/dog.js');
+const Service = require('../models/service.js');
 
 class DogRepository {
   async GetAll() {
     return await Dog.findAll();
   }
 
-  async GetById(id) {
+  async GetById(id, transaction) {
     return await Dog.findOne({
       where: { id },
+      include: [{ model: Service, as: 'services' }],
+      transaction,
     });
   }
 
-  async Add(dog) {
-    await Dog.create(dog);
+  async Add(dog, transaction) {
+    const result = await Dog.create(dog, { transaction });
+
+    return result;
   }
 
   async Update(id, dog) {
-    await Dog.update(dog, {
+    const result = await Dog.update(dog, {
       where: { id },
     });
+
+    return result;
   }
 
   async Delete(id) {

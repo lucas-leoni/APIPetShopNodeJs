@@ -1,12 +1,12 @@
-const DogService = require('../services/dog');
-const service = new DogService();
+const ServiceServico = require('../services/service');
+const servico = new ServiceServico();
 
-class DogController {
+class ServiceController {
   async GetAll(req, res) {
     try {
-      const result = await service.GetAll();
+      const result = await servico.GetAll();
       res.status(200).json({
-        dogs: result,
+        services: result,
       });
     } catch (error) {
       res.status(500).json({
@@ -18,9 +18,9 @@ class DogController {
   async GetById(req, res) {
     try {
       const id = req.params.id;
-      const result = await service.GetById(id);
+      const result = await servico.GetById(id);
       res.status(200).json({
-        dog: result,
+        service: result,
       });
     } catch (error) {
       res.status(500).json({
@@ -31,10 +31,10 @@ class DogController {
 
   async Add(req, res) {
     try {
-      const dog = req.body;
-      const result = await service.Add(dog);
+      const service = req.body;
+      const result = await servico.Add(service);
       res.status(201).json({
-        dog: result,
+        service: result,
       });
     } catch (error) {
       res.status(500).json({
@@ -45,9 +45,9 @@ class DogController {
 
   async Update(req, res) {
     try {
-      const result = await service.Update(req.params.id, req.body);
+      const result = await servico.Update(req.params.id, req.body);
       res.status(200).json({
-        dog: result,
+        service: result,
       });
     } catch (error) {
       res.status(500).json({
@@ -59,9 +59,9 @@ class DogController {
   async Delete(req, res) {
     try {
       const id = req.params.id;
-      await service.Delete(id);
+      await servico.Delete(id);
       res.status(200).json({
-        message: 'Dog deleted successfully!',
+        message: 'Service deleted successfully!',
       });
     } catch (error) {
       res.status(500).json({
@@ -71,4 +71,4 @@ class DogController {
   }
 }
 
-module.exports = DogController;
+module.exports = ServiceController;
