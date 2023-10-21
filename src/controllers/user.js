@@ -97,6 +97,7 @@ class UserController {
         {
           id: user.id,
           email: user.email,
+          permission: user.permission,
         },
         config.secret
       );

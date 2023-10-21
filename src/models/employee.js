@@ -1,26 +1,22 @@
 const { DataTypes } = require('sequelize');
 const Conection = require('../database.js');
 
-const User = Conection.define(
-  'usuarios',
+const Employee = Conection.define(
+  'funcionarios',
   {
     id: {
       primaryKey: true,
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
-    email: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    telephone: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    permission: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
   },
   {
@@ -29,4 +25,4 @@ const User = Conection.define(
   }
 );
 
-module.exports = User;
+module.exports = Employee;
