@@ -1,4 +1,4 @@
-# ⏲️ API Pet Shop
+# 🐕 API Pet Shop
 
 API para Pet Shop que eu desenvolvi no [Programa Jovem Programador](https://www.jovemprogramador.com.br/) da Faculdade Senac.
 
